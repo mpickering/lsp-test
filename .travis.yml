@@ -2,6 +2,11 @@ language: c
 
 sudo: false
 
+os:
+- windows
+- linux
+- osx
+
 cache:
   directories:
     - .stack-work
@@ -12,12 +17,18 @@ cache:
 addons:
   apt:
     packages:
+      - haskell-stack
+      - npm
+  homebrew:
+    packages:
+      - haskell-stack
       - npm
 
 before_install:
   - mkdir -p ~/.local/bin
   - export PATH=$HOME/.local/bin:$PATH
-  - travis_retry curl -L https://get.haskellstack.org/stable/linux-x86_64.tar.gz | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then choco install haskell-stack; fi
+  # - travis_retry curl -L https://get.haskellstack.org/stable/linux-x86_64.tar.gz | tar xz --wildcards --strip-components=1 -C ~/.local/bin '*/stack'
   - mkdir -p haskell-ide-engine
   - cd $HOME/haskell-ide-engine
   - git init
