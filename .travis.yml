@@ -19,6 +19,7 @@ addons:
     packages:
       - haskell-stack
       - npm
+    update: true
   homebrew:
     packages:
       - haskell-stack
