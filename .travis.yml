@@ -30,7 +30,7 @@ addons:
 before_install:
   - mkdir -p ~/.local/bin
   - export PATH=$HOME/.local/bin:$PATH
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then choco install haskell-stack; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then choco install haskell-stack nodejs; fi
   - mkdir -p haskell-ide-engine
   - cd $HOME/haskell-ide-engine
   - git init
