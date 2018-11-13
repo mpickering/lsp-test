@@ -21,7 +21,6 @@ cache:
 addons:
   apt:
     packages:
-      - haskell-stack
       - npm
   homebrew:
     packages:
@@ -31,8 +30,8 @@ addons:
 before_install:
   - mkdir -p ~/.local/bin
   - export PATH=$HOME/.local/bin:$PATH
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then choco install haskell-stack nodejs; fi
-  - stack upgrade --binary-only # apt dist lags behind
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then choco install haskell-stack nodejs 7zip; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then curl -sSL https://get.haskellstack.org/ | sh; fi
   - mkdir -p haskell-ide-engine
   - cd $HOME/haskell-ide-engine
   - git init
@@ -42,7 +41,6 @@ before_install:
   - git submodule init
   - git submodule sync
   - git submodule update --init
-  - stack setup --silent # prevent windows logging vommit
   - stack --no-terminal --skip-ghc-check -j2 install
   - stack exec hoogle generate
   - cd $TRAVIS_BUILD_DIR
