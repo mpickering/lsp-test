@@ -40,6 +40,7 @@ before_install:
   - git submodule init
   - git submodule sync
   - git submodule update --init
+  - stack setup --silent # prevent windows logging vommit
   - stack --no-terminal --skip-ghc-check -j2 install
   - stack exec hoogle generate
   - cd $TRAVIS_BUILD_DIR
