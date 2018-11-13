@@ -7,6 +7,8 @@ os:
 - linux
 - osx
 
+dist: xenial
+
 cache:
   directories:
     - .stack-work
@@ -21,7 +23,6 @@ addons:
     packages:
       - haskell-stack
       - npm
-    update: true
   homebrew:
     packages:
       - haskell-stack
