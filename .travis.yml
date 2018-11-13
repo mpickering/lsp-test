@@ -12,8 +12,8 @@ cache:
     - .stack-work
     - $HOME/.stack
     - $HOME/haskell-ide-engine/.stack-work
-    - %APPDATA%\Local\Programs\stack
-    - C:\sr
+    - C:/Users/travis/AppData/Local/Programs/stack
+    - C:/sr
   timeout: 1000
 
 addons:
