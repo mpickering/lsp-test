@@ -8,13 +8,13 @@ description:
   down to the wire, and @Language.Haskell.LSP.Test@ can replay captured sessions from
   <haskell-lsp-test https://hackage.haskell.org/package/haskell-lsp>.
   It's currently used for testing in <https://github.com/haskell/haskell-ide-engine haskell-ide-engine>.
-homepage:            https://github.com/Bubba/haskell-lsp-test#readme
+homepage:            https://github.com/bubba/haskell-lsp-test#readme
 license:             BSD3
 license-file:        LICENSE
 author:              Luke Lau
 maintainer:          luke_lau@icloud.com
 stability:           experimental
-bug-reports:         https://github.com/Bubba/haskell-lsp-test/issues
+bug-reports:         https://github.com/bubba/haskell-lsp-test/issues
 copyright:           2018 Luke Lau
 category:            Testing
 build-type:          Simple
@@ -25,7 +25,7 @@ tested-with:         GHC == 8.2.2 , GHC == 8.4.2 , GHC == 8.4.3
 
 source-repository head
   type:     git
-  location: https://github.com/Bubba/haskell-lsp-test/
+  location: https://github.com/bubba/haskell-lsp-test/
 
 library
   hs-source-dirs:      src
