@@ -37,12 +37,12 @@ before_install:
   - git init
   - git remote add origin https://github.com/haskell/haskell-ide-engine.git
   - git pull origin master
-  - git checkout ed512e250b8699d212417191064e5fbbc0ecdac8
+  - git checkout 1a5640f4790bde364dcd0a61617c5ca5b85b145a
   - git submodule init
   - git submodule sync
   - git submodule update --init
-  - stack --no-terminal --skip-ghc-check -j2 install
-  - stack exec hoogle generate
+  - stack --no-terminal --skip-ghc-check -j2 install --stack-yaml=stack-8.6.2.yaml
+  - stack exec hoogle generate --stack-yaml=stack-8.6.2.yaml
   - cd $TRAVIS_BUILD_DIR
   - npm update
   - npm i -g javascript-typescript-langserver
