@@ -52,19 +52,20 @@ main = hspec $ do
                     withTimeout 5 $ skipManyTill anyMessage message :: Session ApplyWorkspaceEditRequest
           -- wait just a bit longer than 5 seconds so we have time
           -- to open the document
-          in timeout 6000000 sesh `shouldThrow` anySessionException
+          in timeout 6e6 sesh `shouldThrow` anySessionException
           
       it "doesn't time out" $
         let sesh = runSession "hie" fullCaps "test/data/renamePass" $ do
                     openDoc "Desktop/simple.hs" "haskell"
                     withTimeout 5 $ skipManyTill anyMessage publishDiagnosticsNotification
-          in void $ timeout 6000000 sesh
+          in void $ timeout 6e6 sesh
 
       it "further timeout messages are ignored" $ runSessionWithConfig (defaultConfig { logStdErr = True, logMessages = True }) "hie" fullCaps "test/data/renamePass" $ do
         doc <- openDoc "Desktop/simple.hs" "haskell"
+        getDocumentSymbols doc
         withTimeout 3 $ getDocumentSymbols doc
-        liftIO $ threadDelay 5000000
         -- shouldn't throw an exception
+        liftIO $ threadDelay 5e6
         getDocumentSymbols doc
         return ()
 
@@ -73,7 +74,7 @@ main = hspec $ do
               runSessionWithConfig (def { messageTimeout = 5 }) "hie" fullCaps "test/data/renamePass" $ do
                 doc <- openDoc "Desktop/simple.hs" "haskell"
                 -- shouldn't time out in here since we are overriding it
-                withTimeout 10 $ liftIO $ threadDelay 7000000
+                withTimeout 10 $ liftIO $ threadDelay 7e6
                 getDocumentSymbols doc
                 return True
         in sesh `shouldReturn` True
@@ -83,7 +84,7 @@ main = hspec $ do
               runSessionWithConfig (def { messageTimeout = 5 }) "hie" fullCaps "test/data/renamePass" $ do
                 doc <- openDoc "Desktop/simple.hs" "haskell"
                 -- shouldn't time out in here since we are overriding it
-                withTimeout 10 $ liftIO $ threadDelay 7000000
+                withTimeout 10 $ liftIO $ threadDelay 7e6
                 getDocumentSymbols doc
                 -- should now timeout
                 skipManyTill anyMessage message :: Session ApplyWorkspaceEditRequest
