@@ -28,10 +28,8 @@ addons:
       - npm
 
 before_install:
-  - mkdir -p ~/.local/bin
-  - export PATH=$HOME/.local/bin:$PATH
-  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then choco install haskell-stack nodejs 7zip; export PATH=/C/ProgramData/chocolatey/bin:$PATH; refreshenv; fi
-  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then curl -sSL https://get.haskellstack.org/ | sh; fi
+  - if [[ "$TRAVIS_OS_NAME" == "windows" ]]; then .windows.bat; fi
+  - if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then ./.linux.sh; fi; 
   - mkdir -p haskell-ide-engine
   - cd $HOME/haskell-ide-engine
   - git init
