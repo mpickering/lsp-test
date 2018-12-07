@@ -60,7 +60,7 @@ main = hspec $ do
                     withTimeout 5 $ skipManyTill anyMessage publishDiagnosticsNotification
           in void $ timeout 6000000 sesh
 
-      it "further timeout messages are ignored" $ runSession "hie" fullCaps "test/data/renamePass" $ do
+      it "further timeout messages are ignored" $ runSessionWithConfig (defaultConfig { logStdErr = True, logMessages = True }) "hie" fullCaps "test/data/renamePass" $ do
         doc <- openDoc "Desktop/simple.hs" "haskell"
         withTimeout 3 $ getDocumentSymbols doc
         liftIO $ threadDelay 5000000
