@@ -111,7 +111,7 @@ import System.FilePath
 import qualified Yi.Rope as Rope
 
 -- | Starts a new session.
--- 
+--
 -- > runSession "hie" fullCaps "path/to/root/dir" $ do
 -- >   doc <- openDoc "Desktop/simple.hs" "haskell"
 -- >   diags <- waitForDiagnostics
@@ -378,8 +378,8 @@ getCodeActions doc range = do
     Just (List xs) -> return xs
     _ -> throw (UnexpectedResponseError (rsp ^. LSP.id) (fromJust $ rsp ^. LSP.error))
 
--- | Returns all the code actions in a document by 
--- querying the code actions at each of the current 
+-- | Returns all the code actions in a document by
+-- querying the code actions at each of the current
 -- diagnostics' positions.
 getAllCodeActions :: TextDocumentIdentifier -> Session [CAResult]
 getAllCodeActions doc = do
@@ -415,7 +415,7 @@ executeCommand cmd = do
       execParams = ExecuteCommandParams (cmd ^. command) args
   request_ WorkspaceExecuteCommand execParams
 
--- | Executes a code action. 
+-- | Executes a code action.
 -- Matching with the specification, if a code action
 -- contains both an edit and a command, the edit will
 -- be applied first.
@@ -436,7 +436,7 @@ getVersionedDoc (TextDocumentIdentifier uri) = do
   fs <- vfs <$> get
   let ver =
         case fs Map.!? uri of
-          Just (VirtualFile v _) -> Just v
+          Just (VirtualFile v _ _) -> Just v
           _ -> Nothing
   return (VersionedTextDocumentIdentifier uri ver)
 
@@ -479,7 +479,7 @@ getCompletions doc pos = do
 
 -- | Returns the references for the position in the document.
 getReferences :: TextDocumentIdentifier -- ^ The document to lookup in.
-              -> Position -- ^ The position to lookup. 
+              -> Position -- ^ The position to lookup.
               -> Bool -- ^ Whether to include declarations as references.
               -> Session [Location] -- ^ The locations of the references.
 getReferences doc pos inclDecl =

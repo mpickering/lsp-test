@@ -67,7 +67,7 @@ import System.Directory
 import System.IO
 
 -- | A session representing one instance of launching and connecting to a server.
--- 
+--
 -- You can send and receive messages to the server within 'Session' via 'getMessage',
 -- 'sendRequest' and 'sendNotification'.
 --
@@ -255,7 +255,7 @@ updateState (ReqApplyWorkspaceEdit r) = do
   forM_ bumpedVersions $ \(VersionedTextDocumentIdentifier uri v) ->
     modify $ \s ->
       let oldVFS = vfs s
-          update (VirtualFile oldV t) = VirtualFile (fromMaybe oldV v) t
+          update (VirtualFile oldV t _) = VirtualFile (fromMaybe oldV v) t Nothing
           newVFS = Map.adjust update uri oldVFS
       in s { vfs = newVFS }
 
